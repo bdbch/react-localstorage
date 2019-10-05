@@ -1,0 +1,33 @@
+{
+  "name": "@d2k/react-localstorage",
+  "version": "1.0.0",
+  "description": "React hooks for localstorage",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": "https://github.com/bdbch/react-localstorage",
+  "author": "@d2k",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/**/*.*"
+  ],
+  "keywords": [
+    "react",
+    "hooks",
+    "localstorage"
+  ],
+  "scripts": {
+    "prepublish": "npm run build",
+    "start": "tsc --watch",
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf ./dist"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.23",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "typescript": "^3.5.3"
+  }
+}
