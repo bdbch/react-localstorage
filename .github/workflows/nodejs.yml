@@ -23,7 +23,6 @@ jobs:
         # npm test
     - name: npm publish
       run: |
-        export NPM_TOKEN=${{ secrets.NPM_TOKEN }}
-        npm publish
+        NPM_TOKEN=${{ secrets.NPM_TOKEN }} npm publish
       env:
         CI: true
