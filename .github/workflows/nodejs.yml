@@ -41,23 +41,3 @@ jobs:
           npm publish
         env:
           CI: true
-  build-and-publish-gpm:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.x]
-    steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: jgierer12/npm-auth-gpr@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: npm publish
-        run: |
-          npm install
-          npm publish
-        env:
-          CI: true
