@@ -60,7 +60,7 @@ const useLocalStorage = <T>(
     };
   }, [key]);
 
-  return { data, set, remove };
+  return [data, set, remove];
 };
 
 export default useLocalStorage;

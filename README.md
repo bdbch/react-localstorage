@@ -19,16 +19,16 @@ import React from 'react
 import useLocalStorage from '@d2k/react-localstorage'
 
 const App = () => {
-  const firstName = useLocalStorage('firstName', 'John')
-  const lastName = useLocalStorage('lastName', 'Doe')
+  const [firstName, setFirstName, removeFirstName] = useLocalStorage('firstName', 'John')
+  const [lastName, setLastName, removeLastName] = useLocalStorage('lastName', 'Doe')
 
   // You can update localStorage data via firstName.set(val) or firstName.remove()
 
   return (
     <h1>Demo</h1>
-    { firstName.data && lastName.data && (
+    { firstName && lastName && (
       <p>
-        Hello {firstName.data} {lastName.data}
+        Hello {firstName} {lastName}
       </p>
     )}
   )
