@@ -22,12 +22,14 @@
     "prepublish": "npm run build",
     "start": "tsc --watch",
     "build": "npm run clean && tsc",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "lint": "tslint -c tslint.json 'src/**/*.ts?(x)'"
   },
   "devDependencies": {
     "@types/react": "^16.8.23",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "tslint": "^5.20.0",
     "typescript": "^3.5.3"
   }
 }
