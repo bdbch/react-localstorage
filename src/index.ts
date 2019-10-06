@@ -1,22 +1,17 @@
-import { string } from "prop-types";
 import { useCallback, useEffect, useState } from "react";
 
 const useLocalStorage = <T>(
   key: string,
-  defaultValue?: T
-): {
-  data: T | undefined;
-  set: (val: T) => void;
-  remove: () => void;
-} => {
+  defaultValue?: T,
+): [T | undefined, (val: T) => void, () => void] => {
   const [data, setData] = useState<T | undefined>(undefined);
 
   const set = useCallback(
-    data => {
-      const newData = JSON.stringify(data);
+    (updateData: T) => {
+      const newData = JSON.stringify(updateData);
       window.localStorage.setItem(key, newData);
     },
-    [key]
+    [key],
   );
 
   const remove = useCallback(() => {
@@ -24,17 +19,23 @@ const useLocalStorage = <T>(
   }, [key]);
 
   useEffect(() => {
-    let data = window.localStorage.getItem(key);
+    const currentData = window.localStorage.getItem(key);
 
     if (
-      (!data || typeof data === "undefined" || typeof data === null) &&
+      (!currentData ||
+        typeof currentData === "undefined" ||
+        typeof currentData === null) &&
       defaultValue
     ) {
       set(defaultValue);
     }
 
-    if (data && typeof data !== "undefined" && typeof data !== null) {
-      const parsedData = JSON.parse(data);
+    if (
+      currentData &&
+      typeof currentData !== "undefined" &&
+      typeof currentData !== null
+    ) {
+      const parsedData = JSON.parse(currentData);
       if (parsedData) {
         setData(parsedData);
       }
@@ -49,7 +50,7 @@ const useLocalStorage = <T>(
         }
       }
     },
-    [key]
+    [key],
   );
 
   useEffect(() => {
