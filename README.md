@@ -22,7 +22,7 @@ const App = () => {
   const [firstName, setFirstName, removeFirstName] = useLocalStorage('firstName', 'John')
   const [lastName, setLastName, removeLastName] = useLocalStorage('lastName', 'Doe')
 
-  // You can update localStorage data via firstName.set(val) or firstName.remove()
+  // You can update localStorage data via setFirstName('John') or removeFirstName()
 
   return (
     <h1>Demo</h1>
