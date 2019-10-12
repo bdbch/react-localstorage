@@ -1,22 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 
+const writeToLocalStorage = (key: string, data: any) => {
+  const stringifiedData = JSON.stringify(data);
+  window.localStorage.setItem(key, stringifiedData);
+};
+
+const clearLocalStorageByKey = (key: string) => {
+  window.localStorage.removeItem(key);
+};
+
 const useLocalStorage = <T>(
   key: string,
   defaultValue?: T,
 ): [T | undefined, (val: T) => void, () => void] => {
   const [data, setData] = useState<T | undefined>(undefined);
-
-  const set = useCallback(
-    (updateData: T) => {
-      const newData = JSON.stringify(updateData);
-      window.localStorage.setItem(key, newData);
-    },
-    [key],
-  );
-
-  const remove = useCallback(() => {
-    window.localStorage.removeItem(key);
-  }, [key]);
+  const set = useCallback(data => writeToLocalStorage(key, data), [key]);
+  const remove = useCallback(() => clearLocalStorageByKey(key), [key]);
 
   useEffect(() => {
     const currentData = window.localStorage.getItem(key);
@@ -55,10 +54,7 @@ const useLocalStorage = <T>(
 
   useEffect(() => {
     window.addEventListener("storage", checkLocalStorage);
-
-    return () => {
-      window.removeEventListener("storage", checkLocalStorage);
-    };
+    return () => window.removeEventListener("storage", checkLocalStorage);
   }, [key]);
 
   return [data, set, remove];
