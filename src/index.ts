@@ -14,7 +14,10 @@ const useLocalStorage = <T>(
   defaultValue?: T,
 ): [T | undefined, (val: T) => void, () => void] => {
   const [data, setData] = useState<T | undefined>(undefined);
-  const set = useCallback(data => writeToLocalStorage(key, data), [key]);
+  const set = useCallback(
+    (localStorageData) => writeToLocalStorage(key, localStorageData),
+    [key],
+  );
   const remove = useCallback(() => clearLocalStorageByKey(key), [key]);
 
   useEffect(() => {
