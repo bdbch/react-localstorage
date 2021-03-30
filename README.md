@@ -15,7 +15,7 @@ npm i @d2k/react-localstorage --save
 React Localstorage gives you simple hooks to work with your localstorage. Here is some example code:
 
 ```jsx
-import React from 'react
+import React from 'react'
 import useLocalStorage from '@d2k/react-localstorage'
 
 const App = () => {
